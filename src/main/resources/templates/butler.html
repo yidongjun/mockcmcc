@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript">var __startTime = new Date().getTime();</script>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>积分兑换</title>
+    <meta name="data-spm" content="3.1"/>
+    <script src="https://m.changyoyo.com/butler/js/rem.js"></script>
+    <link href="https://m.changyoyo.com/butler/css/mui.min.css" rel="stylesheet"/>
+    <link href="https://m.changyoyo.com/butler/css/common.css" rel="stylesheet"/>
+    <link href="https://m.changyoyo.com/butler/css/home/index.css?v=20181011" rel="stylesheet"/>
+    <style>
+
+    </style>
+<body data-spm="21">
+
+<div class="mui-content">
+    <div class="top-banner">
+        <!-- <img src="https://m.changyoyo.com/butler/images/171110/banner.png" alt=""/> -->
+        <!-- <div class="more">
+            <div class="more_con">
+                <a class="bindlist" href="/jfpay/#/bindlist" data-spm='100327'><b></b>解除绑定</a>
+            </div>
+        </div> -->
+        <div class="top-head">
+            <div class="item item-2">
+				<span class="points">
+										100
+									</span>
+                <span class="hide-points">****</span><label>积分</label>
+                <button class="eye-btn"></button>
+            </div>
+            <div class="item item-3">约值人民币
+                <span class="money">
+                    					1
+									 </span>
+                <span class="hide-points">****</span>元
+            </div>
+
+        </div>
+        <div class="line"></div>
+        <div class="func-list">
+            <dl>
+                <dt>
+                    <span class="send-icon"></span>
+                    <a href="/event/jfpresent/index.html">转赠积分</a>
+                </dt>
+                <dt>
+                    <span class="recharge-icon"></span>
+                    <a href="/recharge/index.html?needlogin=true">券码兑换</a>
+                </dt>
+                <dt>
+                    <span class="detail-icon"></span>
+                    <a href="/wallet/detail/date.htm?needlogin=true">积分明细</a>
+                </dt>
+            </dl>
+        </div>
+    </div>
+    <div class="pro_box">
+        <!-- <div class="h_title">积分兑入，可换取等值金额<span>0</span>元</div> -->
+        <ul class="item_box">
+            <li class="CMCC_li" id="CMCC_li" data-spm="4" data-spm-type="all" style="display:block">
+                <div id="CMCC_div">
+
+                    <div class="item-middle">
+                        <h2>中国移动</h2>
+                        <p class="txt">绑定后才可进行积分兑入</p>
+                    </div>
+                    <div class="item-bg move-unbind" style="display: block;"><img
+                            src="https://m.changyoyo.com/butler/images/move-unbind.png">
+                    </div>
+                    <div class="item-bg move-unactive"><img
+                            src="https://m.changyoyo.com/butler/images/move-unactive.png"></div>
+                    <div class="item-bg move-bind">
+                        <div class="arrow"></div>
+                    </div>
+                </div>
+            </li>
+            <li class="BOC_li" id="BOC_li" data-spm="3" data-spm-type="all" style="display:block">
+                <div id="BOC_div">
+                    <div class="item-middle">
+                        <h2>中国银行</h2>
+                        <p class="txt">绑定后才可进行积分兑入</p>
+                        <p class="bind-txt"><span></span></p>
+                    </div>
+                    <div class="item-bg bank-unbind"><img src="https://m.changyoyo.com/butler/images/bank-unbind.png">
+                    </div>
+                    <div class="item-bg bank-bind">
+                        <div class="arrow"></div>
+                    </div>
+                </div>
+            </li>
+            <li class="CEAIR_li" id="CEAIR_li" data-spm="5" data-spm-type="all" style="display:block">
+                <div id="CEAIR_div">
+                    <div class="item-middle">
+                        <h2>东方航空</h2>
+                        <p class="txt">绑定后才可进行积分兑入</p>
+                        <p class="bind-txt"><span></span></p>
+                    </div>
+                    <div class="item-bg air-unbind"><img src="https://m.changyoyo.com/butler/images/air-unbind.png">
+                    </div>
+                    <div class="item-bg air-bind">
+                        <div class="arrow"></div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- 小程序隐藏域 -->
+    <div id='miniapp-type' style='display: none'></div>
+
+    <div class="detail">
+        <a href="/butler/exchange/mobiledetail.htm">查看历史兑换明细</a>
+    </div>
+    <!-- <div class="cycount">总共可以兑换<span>***</span>畅由积分<i></i>
+        <p>详细兑换积分规则请参照各兑换积分详情页中的“兑换说明为准”；点击“刷新”按钮，以获取最新移动积分余额兑换畅由积分部分。</p>
+    </div> -->
+
+    <div id="tost">积分查询中...</div>
+    <div id="tost1">查询失败，请重试</div>
+</div>
+<p class="footer-text">更多商户敬请期待</p>
+<div class="cover"></div>
+<a href="https://jf365.boc.cn/BOCMOBILENET/kindItem.do?twoMenuId=ICI1000007022&twoMenuName=畅由平台 0" id="iDuiFen"
+   style="display: none"><img src="https://m.changyoyo.com/butler/images/duifen.png" class="duifen"></a>
+<img src="https://m.changyoyo.com/butler/images/close2.png" class="close" style="display: none">
+
+<script type="text/javascript">
+    var tips = "";
+</script>
+<script src="https://m.changyoyo.com/butler/js/mui.min.js"></script>
+<script src="https://m.changyoyo.com/butler/js/jquery-1.7.2.min.js"></script>
+<script src="/static/js/libs/CryptoJS/md5.js"></script>
+<script src="/static/js/common/common.js"></script>
+<script src="/static/js/common/spm.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
+<script src="https://m.changyoyo.com/butler/js/home/index.js?v=20181011"></script>
+<script type="text/javascript">
+    //options=1，2，3 。用于表示需展示兑分的股东方，1代表移动，2代表中国银行，3代表东方航空，此项值为空时显示所有股东方
+    var idArr = ['CMCC_li', 'BOC_li', 'CEAIR_li']
+    if (cookieUtil.get('options')) {
+        var showTab = cookieUtil.get('options')
+        if (showTab.indexOf('/')) {
+            var arr = showTab.split('/')
+            arr.forEach(function (item) {
+                if (item >= 1 && item <= 3) {
+                    document.getElementById(idArr[+item - 1]).style.cssText = "display:block"
+                }
+            })
+        } else {
+            if (showTab >= 1 && showTab <= 3) {
+                document.getElementById(idArr[+showTab - 1]).style.cssText = "display:block"
+            } else {
+                showAll()
+            }
+        }
+    } else {
+        showAll()
+    }
+
+    function showAll() {
+        document.getElementById('CMCC_li').style.cssText = "display:block"
+        document.getElementById('BOC_li').style.cssText = "display:block"
+        document.getElementById('CEAIR_li').style.cssText = "display:block"
+    }
+
+    showAll();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,620 @@
+
+<!DOCTYPE html>
+<html>
+<head><script type="text/javascript">var __startTime = new Date().getTime();</script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>积分兑换</title>
+    <link href="https://m.changyoyo.com/butler/css/mui.min.css" rel="stylesheet"/>
+    <link href="https://m.changyoyo.com/butler/css/common.css" rel="stylesheet"/>
+    <script src="https://m.changyoyo.com/butler/js/jquery-1.7.2.min.js"></script>
+    <script src="https://m.changyoyo.com/butler/js/mui.min.js"></script>
+    <script src="https://m.changyoyo.com/butler/js/rem.js"></script>
+    <script src="https://m.changyoyo.com/butler/js/common.js?v=2018050701"></script>
+    <style>
+        .card_box { margin: 0px .5rem; }
+        .card_main { margin:.3rem; }
+        .m_btn1{border: 0;  background: #eee;border-radius: 0;font-size: .24rem;width: 100%;height: .8rem;  display: block;  text-align: center;}
+        .messages { display:none; position:fixed; left:0; right:0; bottom:0; top:0; overflow:auto; background-color:rgba(0,0,0,0.75); padding:0.3rem; z-index:999; }
+        .card_logo, .card_right { width:1.2rem; height: 1.2rem;}
+        .card_logo h5, .card_right h5 { color:#333; font-size:.28rem; }
+        .card_change {	width: 2.8rem;float: left; margin-left: .34rem;  margin-right: .34rem;	padding-top: 0;}
+        .card_change img{height: .1rem;}
+        .col_gold{color:#d3b669!important ;float: left;margin-right: .6rem;}
+        .card_input {float: left;}
+        .col_gold input{font-family: PingFangSC-Medium;font-size: .6rem;  color: #D5A940;  letter-spacing: 0;  line-height: .6rem;  border: 0;  padding: 0;  margin: .12rem 0 0;  text-align: left;}
+        .input_gold{clear: both;padding: .1rem .2rem;text-align: center;border-radius:.12rem;width: 2.4rem !important;font-size: .48rem;}
+        .btn_change {  width: 35%;  background: #d3b669;  color: #fff;  text-align: center;  float: right;  line-height: 1rem;  height: 1rem;  font-size: .32rem;}
+        .canUsePoint{	opacity: 0.8;	font-family: PingFangSC-Medium;	font-size: .28rem;	color: #000000;	letter-spacing: 0;	line-height: .28rem;}
+        .proportion{	opacity: 0.8;	font-family: PingFangSC-Regular;	font-size: .24rem;	color: #000000;	letter-spacing: 0;	line-height: .24rem;}
+        .mt07{	margin-top: 0.7rem;}
+        #reduce, #add{  position: absolute;  top: 50%;  width: 100%;  left: 0;}
+        .card_inner .card_box{	margin: 0;  padding: .4rem .3rem;  text-align: center;  height: 2rem;font-size: 0.32rem;}
+        #exchange{	opacity: 0.8;  font-family: PingFangSC-Regular;  font-size: .32rem;  color: #000000;  letter-spacing: 0;  text-align: center;  line-height: .32rem;  border-radius: 0;  background: #DFB856;  width: 3rem;}
+        .unbind{opacity: 0.4;  font-family: PingFangSC-Regular;  font-size: .24rem;  color: #000000;  letter-spacing: 0;  text-align: right;  line-height: .24rem;  text-decoration: underline;}
+        .webview-app .mui-bar-nav~.mui-content {padding-top: 0;}
+        .card_text.col_gold{margin-left: 0;}
+        .card_add{margin-left: 0;}
+        .card_top{padding-top:0;}
+        #paypoints{font-size: .6rem;color: #D5A940;margin-top: 1rem; text-align:left;}
+        .change_close{background-size: cover;}
+        .line{float: left;  background: #eee;height: .8rem;  line-height: .76rem;}
+        .change_left{width: 60%; background: #EEEEEE;}
+        .change_left.sendcode{width: 38%;}
+        .signin_box_02{border-radius: 0;}
+        .success-pop-miniapp{display:table; position:fixed;width:100%;height: 100%; background:rgba(0,0,0,.5);z-index:999;top:0;left:0;}
+        .success-pop-miniapp .content{display:table-cell;vertical-align: middle;text-align:center;}
+        .success-pop-miniapp .content .bg{background:#fff;margin:auto;width:4.8rem;height:5rem;padding: .6rem .8rem .44rem .8rem;border-radius:.1rem;}
+        .success-pop-miniapp .content .bg .icon img{width:2rem;height:2rem;}
+        .success-pop-miniapp .content .bg .txt{font-size:.4rem;margin-top:.22rem;}
+        .success-pop-miniapp .content .bg .btn{width:100%;background:#ffc922;height:.88rem;border-radius:.8rem;line-height:.88rem;font-size:.32rem;margin-top:.54rem;}
+    </style>
+</head>
+<body data-spm="27">
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title"></h1>
+</header>
+<div class="mui-content">
+    <div class="card_main">
+        <div class="card_top">
+            <div class="card_box">
+                <div class="card_logo font2">
+                    <img src="https://m.changyoyo.com/butler/images/yidong_new.png">
+                    <!-- <h5>中国移动</h5> -->
+                    <!-- <span id="butpoints">1,005</span> -->
+                </div>
+                <div class="card_change">
+                    <span class="canUsePoint">可用移动积分：1,005</span>
+                    <img src="https://m.changyoyo.com/butler/images/line.png" align="absmiddle">
+                    <span class="proportion">兑分比例: 120 : 100</span>
+                </div>
+                <div class="card_right font2">
+                    <img src="https://m.changyoyo.com/butler/images/changyou_new.png">
+                    <!-- <h5 class="mt07">畅由</h5> -->
+                    <!-- <span id="maxcypoints">1,000</span> -->
+                </div>
+                <div style=" clear:both"></div>
+            </div>
+        </div>
+        <!-- 		<div class="card_m">
+                    <div class="card_m_l"></div>
+                    <div class="card_m_r"></div>
+                    <div class="card_m_m"></div>
+                </div> -->
+        <div class="card_inner">
+            <div class="card_box">
+                <div class="card_text col_gold">
+					<span style="
+					    opacity: 0.4;
+					    font-family: PingFangSC-Regular;
+					    font-size: .24rem;
+					    color: #000000;
+					    letter-spacing: 0;
+					    line-height: .24rem;
+					    float: left;
+					">获得畅由积分</span>
+                    <br>
+                    <input name="tel" type="tel" class="input_gold" id="exchangepoints" onfocus="bottomhide()" onblur="inpoints(this.value)"
+                           pattern="[0-9]*">
+                </div>
+                <div class="card_r">
+                    <a id="reduce">
+                        <img src="https://m.changyoyo.com/butler/images/jian.png">
+                    </a>
+                </div>
+                <div style="float: left;width: 1px;margin: 0 .8rem;height: .3rem;background: #eee;margin-top: .8rem;"></div>
+                <!-- <div class="card_input"> -->
+                <!-- <input name="tel" type="tel" class="input_gold" id="exchangepoints" onfocus="bottomhide()" onblur="inpoints(this.value)"
+                pattern="[0-9]*"> -->
+                <!-- </div> -->
+                <div class="card_add">
+                    <a id="add">
+                        <img src="https://m.changyoyo.com/butler/images/jia.png">
+                    </a>
+                </div>
+            </div>
+            <ul class="card_content" style="display:none;">
+                <li>支付(移动积分）
+                    <span class="right_text  font2" id="paypoints"></span>
+                </li>
+                <li>兑换比例(移动积分：畅由积分）
+                    <span class=" font2" style="width:.8rem; float:right; display:inline-block; text-align:right;">120:100</span>
+                </li>
+                <li>兑换后移动余额积分
+                    <!-- <span class=" font2" style="width:.8rem; float:right; display:inline-block; text-align:right;" id="ydbalance"></span> -->
+                </li>
+                <li>兑换后畅由余额积分
+                    <!-- <span class=" font2" style="width:.8rem; float:right; display:inline-block; text-align:right;" id="cybalance"></span> -->
+                </li>
+            </ul>
+            <input type="hidden" id="orderid">
+            <input type="hidden" id="sfpoints" value="1005">
+            <input type="hidden" id="cypoints" value="5">
+            <input type="hidden" id="mintracepoints" value="100">
+            <input type="hidden" id="maxtracepoints" value="20000">
+            <input type="hidden" id="pointsstep" value="100">
+            <input type="hidden" id="servicefee" value="0.00">
+            <input type="hidden" id="pointstype" value="PTJF">
+            <input type="hidden" id="rate" value="1.20">
+            <input type="hidden" id="maxmonthpoints" value="999999">
+            <input type="hidden" id="maxdaypointstimes" value="9999">
+            <input type="hidden" id="maxdaypoints" value="999999">
+            <input type="hidden" id="daypointsnum" value="0">
+            <input type="hidden" id="daypointstimes" value="0">
+            <input type="hidden" id="monthpointsnum" value="0">
+        </div>
+        <p style="
+			opacity: 0.8;
+			font-family: PingFangSC-Regular;
+			font-size: .24rem;
+			color: #000000;
+			letter-spacing: 0;
+			margin-top: .3rem;
+			line-height:.24rem;
+			" >剩余移动积分：<span id="ydbalance"></span></p>
+        <div class="explain_c"> 兑换说明：
+            <br>1.单次至少需要兑换100畅由积分，且兑换积分为100的整数倍</br>
+            2.兑换积分如未消费7日内可自主申请退回，超过7日可联系客服协商解决（享受新人优惠福利的用户不再享受初次兑入积分退分功能）</br>
+            3.积分撤销请在兑换明细页内进行</br>
+            4.畅由积分可在购买平台商品时抵用现金，100积分抵用人民币1元</br></div>
+        <p style="text-align: center; padding-bottom: 2rem;">
+            <a class="unbind"  href="/butler/cmcc/unbinding.htm">解除绑定</a>
+        </p>
+    </div>
+    <div class="mui-bar mui-bar-tab mui-bar-summary btm" style="position:fixed;bottom:0;" id="bottom">
+        <div class="use-point-div">
+            <p class="use-point">消耗移动积分：</p>
+            <span class="red_font" id="consumepoints"></span>
+        </div>
+        <button class="btn_change" id="exchange" data-spm="128">确认兑换</button>
+    </div>
+</div>
+<div class="messages" id="message">
+    <div class="mui-content">
+        <div class="signin_box_02">
+            <a class=" mui-icon  change_close" id="close"></a>
+            <div class="change_title">短信验证码</div>
+            <div class="binding_user">
+                <span>中国移动手机号：136****6344</span>
+            </div>
+            <div class="mg_15">
+                <div class="change_left">
+                    <input type="tel" placeholder="请输入验证码" id="code" onkeyup="incode(this.value)" maxlength="6">
+                </div>
+                <div class="line"><p>|</p></div>
+                <div class="change_left sendcode">
+                    <button class="m_btn1" id="sendcode"></button>
+                    <!-- <div class="change_left"></div> -->
+                </div>
+                <div style=" clear:both"></div>
+                <div class="btn_blue02" id="confirm">确认</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class='success-pop-miniapp' style='display:none'>
+    <div class='content'>
+        <div class='bg'>
+            <div class='icon'><img src='/butler/images/success_icon.png' /></div>
+            <div class='txt'>兑换成功</div>
+            <div class='btn' id='miniapp-btn'>确定</div>
+        </div>
+    </div>
+</div>
+<script src="/static/js/common/spm.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
+<script type="text/javascript">
+    spm.push(['_trackPageview']);
+</script>
+<script>
+
+    var ua = navigator.userAgent.toLowerCase();
+
+    // 返回小程序
+    wx.miniProgram.getEnv(function(res) {
+        if (res.miniprogram) {
+            $('#miniapp-btn').click(function(){
+                wx.miniProgram.navigateBack({
+                    delta: 1
+                });
+            })
+        }
+    })
+
+    function bottomhide(){
+        $("#bottom").css("display","none");
+    }
+    //步长
+    var pointsstep = $("#pointsstep").val();
+    //三方：畅由  比率
+    var rate = $("#rate").val();
+    //三方积分总数
+    var sfpoints = $("#sfpoints").val();
+    //畅由积分总数
+    var cypoints = $("#cypoints").val();
+    //单笔至少兑换积分
+    var mintracepoints = $("#mintracepoints").val();
+    //单笔最多兑换积分
+    var maxtracepoints = $("#maxtracepoints").val();
+    //消耗三方积分总数
+    var paypoints = rate*pointsstep;
+    //手续费
+    var servicefee = $("#servicefee").val();
+    //最少消耗积分数  最低兑换畅由积分所需要的中行积分
+    var minpaypoints = rate*mintracepoints;
+    $("#exchangepoints").val(mintracepoints);
+    $("#paypoints").text(minpaypoints);
+    $("#consumepoints").text(parseInt(minpaypoints));
+    //兑换后三方积分总数
+    var ydbalance = parseInt(sfpoints)-parseInt(minpaypoints);
+    $("#ydbalance").text(ydbalance);
+    //兑换后畅由积分总数
+    var cybalance = parseInt(cypoints)+parseInt(mintracepoints);
+    $("#cybalance").text(cybalance);
+    //最多兑换多少畅由积分
+    //基数 +（取整（（总积分/比率）/长））*长
+    var mvar = parseInt((sfpoints/rate)/pointsstep);
+    var maxlmpoints= parseInt(mvar * pointsstep);
+    var canClickBtn = true;
+    //输入框根据步长向下取整
+    function inpoints(value){
+        $("#bottom").css("display","block");
+        var val = value;//输入的值
+        //对输入的值进行正则校验
+        var reg = "^[0-9]*$";
+        var r = val.match(reg);
+        if(r==null)    {
+            $("#exchangepoints").val(mintracepoints);//取最低兑换积分
+            $("#paypoints").text(minpaypoints);
+            $("#consumepoints").text(parseInt(minpaypoints));
+            $("#ydbalance").text(ydbalance);
+            $("#cybalance").text(cybalance);
+            mui.toast('您输入的格式不正确 ，请重新输入',{ duration:5000, type:'div' });
+            canClickBtn = false;
+            return;
+        }
+
+        //如果大于单笔最多兑换积分
+        if(parseInt(val)>parseInt(maxtracepoints)){
+            //显示成maxtracepoints 单笔最多的
+            var invar = parseInt((maxtracepoints - mintracepoints )/pointsstep);
+            var points = parseInt(mintracepoints) + parseInt(invar * pointsstep);
+            $("#exchangepoints").val(points);
+            //消耗积分数
+            var xhpoints = parseInt(invar * paypoints)+parseInt(minpaypoints);
+            $("#paypoints").text(xhpoints);
+            $("#consumepoints").text(parseInt(xhpoints));
+            $("#ydbalance").text(parseInt(sfpoints)-parseInt(xhpoints));
+            $("#cybalance").text(parseInt(cypoints)+parseInt(points));
+            //消耗积分不能超过总积分
+            if(parseInt(xhpoints)>parseInt(sfpoints)){
+                $("#exchangepoints").val(maxlmpoints);
+                $("#paypoints").text(maxlmpoints*rate);
+                $("#consumepoints").text(parseInt(maxlmpoints*rate));
+                $("#ydbalance").text(parseInt(sfpoints)-parseInt(maxlmpoints*rate));
+                $("#cybalance").text(parseInt(cypoints)+parseInt(maxlmpoints));
+                mui.toast('消耗积分已超过总积分，请重新输入',{ duration:5000, type:'div' });
+                canClickBtn = false;
+                return;
+            }
+            mui.toast('单笔兑换最多'+maxtracepoints+'积分',{ duration:5000, type:'div' });
+            canClickBtn = false;
+            return;
+        }
+        //最少兑换积分数
+        if(parseInt(val)<parseInt(mintracepoints)){
+            $("#exchangepoints").val(mintracepoints);
+            $("#paypoints").text(minpaypoints);
+            $("#consumepoints").text(parseInt(minpaypoints));
+            $("#ydbalance").text(ydbalance);
+            $("#cybalance").text(cybalance);
+            mui.toast('最低兑换'+mintracepoints+'积分',{ duration:5000, type:'div' });
+            canClickBtn = false;
+            return;
+        }
+        //基数 +（取整（（输入-基数）/长））*长
+        var invar = parseInt((val - mintracepoints )/pointsstep);
+        var points = parseInt(mintracepoints) + parseInt(invar * pointsstep);
+        $("#exchangepoints").val(points);
+        //消耗积分数
+        var xhpoints = parseInt(invar * paypoints)+ parseInt(minpaypoints);
+        $("#paypoints").text(xhpoints);
+        $("#consumepoints").text(parseInt(xhpoints));
+        $("#ydbalance").text(parseInt(sfpoints)-parseInt(xhpoints));
+        $("#cybalance").text(parseInt(cypoints)+parseInt(points));
+        //消耗积分不能超过总积分
+        if(parseInt(xhpoints) > parseInt(sfpoints)){
+            $("#exchangepoints").val(maxlmpoints);
+            $("#paypoints").text(maxlmpoints*rate);
+            $("#consumepoints").text(parseInt(maxlmpoints*rate));
+            $("#ydbalance").text(parseInt(sfpoints)-parseInt(maxlmpoints*rate));
+            $("#cybalance").text(parseInt(cypoints)+parseInt(maxlmpoints));
+            mui.toast('消耗积分已超过总积分，请重新输入',{ duration:5000, type:'div' });
+            canClickBtn = false;
+            return;
+        }
+    }
+    //按一次减号  减步长
+    document.querySelector('#reduce').addEventListener('tap', function() {
+        var exchange = $("#exchangepoints").val();
+        var pay = $("#paypoints").html();
+        var consume = $("#consumepoints").html();
+        if(parseInt(exchange)<=parseInt(mintracepoints)){
+            mui.toast('最少兑换'+mintracepoints+'积分',{ duration:5000, type:'div' });
+            return;
+        }
+        $("#exchangepoints").val(exchange-pointsstep);
+        $("#paypoints").text(pay-paypoints);
+        $("#consumepoints").text(consume-paypoints);
+        $("#ydbalance").text(parseInt(sfpoints)-parseInt(consume-paypoints));
+        $("#cybalance").text(parseInt(cypoints)+parseInt(exchange-pointsstep));
+    });
+    //按一次加号  加步长
+    document.querySelector('#add').addEventListener('tap', function() {
+        var exchange = $("#exchangepoints").val();
+        var pay = $("#paypoints").html();
+        var consume = $("#consumepoints").html();
+
+        var num =  parseInt(exchange)+parseInt(pointsstep);
+        var point = parseInt(pay)+parseInt(paypoints);
+
+        if(parseInt(point) > parseInt(sfpoints)){
+            $("#exchangepoints").val(num-pointsstep);
+            $("#paypoints").text(parseInt(point)-parseInt(paypoints));
+            $("#consumepoints").text(parseInt(point)-parseInt(paypoints));
+            $("#ydbalance").text(parseInt(sfpoints)-parseInt(parseInt(point)-parseInt(paypoints)));
+            $("#cybalance").text(parseInt(cypoints)+parseInt(num-pointsstep));
+            mui.toast('您的积分不足',{ duration:5000, type:'div' });
+            return;
+        }
+        if(parseInt(num) >= parseInt(maxtracepoints)){
+            $("#exchangepoints").val(maxtracepoints);
+            $("#paypoints").text(maxtracepoints*rate);
+            $("#consumepoints").text(parseInt(maxtracepoints*rate));
+            $("#ydbalance").text(parseInt(sfpoints)-parseInt(maxtracepoints*rate));
+            $("#cybalance").text(parseInt(cypoints)+parseInt(maxtracepoints));
+            mui.toast('单笔兑换最多'+maxtracepoints+'积分',{ duration:5000, type:'div' });
+            return;
+        }
+        $("#exchangepoints").val(num);
+        $("#paypoints").text(point);
+        $("#consumepoints").text(parseInt(point));
+        $("#ydbalance").text(parseInt(sfpoints)-parseInt(point));
+        $("#cybalance").text(parseInt(cypoints)+parseInt(num));
+    });
+
+    //用户积分兑换累积
+    //当月兑换积分数
+    var monthpointsnum = $("#monthpointsnum").val();
+    //当日兑换积分笔数
+    var daypointstimes = $("#daypointstimes").val();
+    //当日兑换积分个数
+    var daypointsnum = $("#daypointsnum").val();
+
+    //积分规则
+    ///单日最多兑换积分
+    var maxdaypoints = $("#maxdaypoints").val();
+    //单日最多兑换积分次数
+    var maxdaypointstimes = $("#maxdaypointstimes").val();
+    ///单月最多兑换积分
+    var maxmonthpoints = $("#maxmonthpoints").val();
+
+    var exflag = true, isDownEnd = false;
+    var countdown;
+    document.querySelector('#exchange').addEventListener('tap', function() {
+        if (isDownEnd) {
+            $("#message").show();
+            $('html').css({"height":"100%","overflow":"hidden"});
+            $('body').css({"height":"100%","overflow":"hidden"});
+            return;
+        }
+        if(!canClickBtn){
+            canClickBtn = true;
+            return;
+        }
+        var exchangepoints = $("#exchangepoints").val();//兑换畅由积分
+        var consume = $("#consumepoints").html(); //消耗中行积分
+        var paysfpoint = $("#paypoints").html();//消耗中行积分（不带手续费）
+        var pointstype = $("#pointstype").val()//积分类型
+        if(parseInt(consume)>parseInt(sfpoints)){
+            mui.toast('您的积分不足',{ duration:5000, type:'div' });
+            return;
+        }
+        if(parseInt(daypointstimes)>=parseInt(maxdaypointstimes)){
+            mui.toast('当日兑换最多'+ maxdaypointstimes +'笔数，请明日再来',{ duration:5000, type:'div' });
+            return;
+        }
+        if(parseInt(daypointsnum)>=parseInt(maxdaypoints)){
+            mui.toast('当日兑换最多'+ maxdaypoints +'积分，请明日再来',{ duration:5000, type:'div' });
+            return;
+        }
+        if(parseInt(monthpointsnum)>=parseInt(maxmonthpoints)){
+            mui.toast('当月兑换最多'+ maxmonthpoints +'积分',{ duration:5000, type:'div' });
+            return;
+        }
+        inpoints(exchangepoints);
+        if(exflag){
+            exflag = false;
+            isDownEnd = true;
+            mui.ajax('/butler/exchange/cmcc/confirm/CMCC.htm',{
+                data:{outerpoints:paysfpoint,points:exchangepoints,servicefee:servicefee,pointstype:pointstype,rate:rate},
+                dataType:'json', //服务器返回json格式数据
+                type:'get', //HTTP请求类型
+                success:function(data){
+                    var ret = data.ret;
+                    var msg = data.msg;
+                    if(ret=="0000"){
+                        exflag = true;
+                        var mobileid = data.mobileid;
+                        var orderid = data.orderid;
+                        $("#mobileid").text(mobileid);
+                        $("#orderid").val(orderid);
+                        var count = 59;
+                        countdown = setInterval(CountDown, 1000);
+                        $("#message").show();
+                        $('html').css({"height":"100%","overflow":"hidden"});
+                        $('body').css({"height":"100%","overflow":"hidden"});
+                        $("#sendcode").attr("disabled", true);
+                        $("#sendcode").text("60秒后重新发送");
+                        function CountDown() {
+                            $("#sendcode").text(count+"秒后重新发送");
+                            $("#sendcode").attr("disabled", true);
+                            if (count <= 0) {
+                                $("#sendcode").removeAttr("disabled");
+                                $("#sendcode").text("重新发送");
+                                clearInterval(countdown);
+                                isDownEnd = false;
+                            }
+                            count--;
+                        }
+                    }else {
+                        exflag = true;
+                        isDownEnd = false;
+                        mui.toast('兑换失败，'+msg,{ duration:5000, type:'div' });
+                    }
+                },
+                error:function(xhr,type,errorThrown){
+                    //异常处理；
+                    exflag = true;
+                    isDownEnd = false;
+                    mui.toast('网络异常，请稍后再试！',{ duration:5000, type:'div' });
+                }
+            });
+        }
+    });
+
+    //发送验证码
+    $("#sendcode").click(function(){
+        var orderid = $("#orderid").val();
+        mui.ajax('/butler/exchange/cmcc/sendcode.htm',{
+            data:{otptype:"decut",orderid:orderid},
+            dataType:'json', //服务器返回json格式数据
+            type:'get', //HTTP请求类型
+            success:function(data){
+                var ret = data.ret;
+                var msg = data.msg;
+                if(ret == "0000"){
+                    var count = 60;
+                    countdown = setInterval(CountDown, 1000);
+                    function CountDown() {
+                        $("#sendcode").attr("disabled", true);
+                        $("#sendcode").text(count+"秒后重新发送");
+                        if (count <= 0) {
+                            $("#sendcode").removeAttr("disabled");
+                            $("#sendcode").text("重新发送");
+                            clearInterval(countdown);
+                        }
+                        count--;
+                    }
+                    mui.toast(msg,{ duration:5000, type:'div' });
+                }else{
+                    mui.toast(msg,{ duration:5000, type:'div' });
+                }
+            }
+        });
+    });
+
+    function incode(value){
+        var code = $("#code").val();
+        //验证码验证
+        var code_ret = /^[0-9]*$/;
+        if(code_ret.test(code)){
+        }else{
+            mui.toast('请输入6位数字验证码',{ duration:5000, type:'div' });
+            return;
+        }
+    }
+    var flag = true;
+    //校验验证码
+    $("#confirm").click(function(){
+        var code = $("#code").val();
+        var exchangepoints = $("#exchangepoints").val();//兑换畅由积分
+        //验证码验证
+        var code_ret = /^\d{6}$/;
+        if(!code_ret.test(code)){
+            mui.toast('请输入6位数字验证码',{ duration:5000, type:'div' });
+            return;
+        }
+        var orderid = $("#orderid").val();
+
+        if(flag){
+            flag = false;
+            mui.ajax('/butler/exchange/cmcc/pointsdecut.htm',{
+                data:{idcode:code,orderid:orderid},
+                dataType:'json', //服务器返回json格式数据
+                type:'get', //HTTP请求类型
+                success:function(data){
+                    spm.push([ '_trackEvent', '/butler/exchange/cmcc/pointsdecut', '02', data.ret ]);
+                    var ret = data.ret;
+                    var msg = data.msg;
+                    $("#code").val('')
+                    if(ret == "0000"){
+                        // 小程序进入时弹窗提示兑换成功
+                        if (ua.indexOf('micromessenger') == -1) {//不在微信中
+                            // 走不在小程序的逻辑
+                            if(cookieUtil.get('flag') && cookieUtil.get('flag') == 'jr' && cookieUtil.get('jumpBack')){
+                                let a = document.cookie.split(';')
+                                let b = a.reduce((obj,item) => {
+                                    let first = item.indexOf('=')
+                                    obj[(item.substr(0,first)).trim()]=item.substr(first+1)
+                                    return obj
+                                },{})
+                                location.href = b.jumpBack
+                            }else{
+                                mui.toast(msg,{ duration:5000, type:'div' });
+                                window.location=spm.addSpm("/butler/exchange/success/"+exchangepoints+".htm");
+                            }
+                        } else {
+                            wx.miniProgram.getEnv(function(res) {
+                                if (res.miniprogram) {
+                                    // 走在小程序的逻辑
+                                    $("#message").hide();
+                                    $('.success-pop-miniapp').show();
+                                } else {
+                                    // 走不在小程序的逻辑
+                                    if(cookieUtil.get('flag') && cookieUtil.get('flag') == 'jr' && cookieUtil.get('jumpBack')){
+                                        let a = document.cookie.split(';')
+                                        let b = a.reduce((obj,item) => {
+                                            let first = item.indexOf('=')
+                                            obj[(item.substr(0,first)).trim()]=item.substr(first+1)
+                                            return obj
+                                        },{})
+                                        location.href = b.jumpBack
+                                    }else{
+                                        mui.toast(msg,{ duration:5000, type:'div' });
+                                        window.location=spm.addSpm("/butler/exchange/success/"+exchangepoints+".htm");
+                                    }
+                                }
+                            })
+                        }
+                    }else if(ret == "B024"){//验证码失效
+                        mui.toast(msg,{ duration:5000, type:'div' });
+                        flag = true;
+                    }else if(ret == "B025"){//验证码错误
+                        mui.toast(msg,{ duration:5000, type:'div' });
+                        flag = true;
+                    }else{
+                        $("#message").hide();
+                        flag = true;
+                        mui.toast(msg,{ duration:5000, type:'div' });
+                        //window.location = spm.addSpm("/butler/exchange/cmcc/thirdpart.htm");
+                    }
+                }
+            });
+        }
+
+
+    });
+    $("#close").click(function(){
+        $("#message").hide();
+        if (!isDownEnd) {
+            clearInterval(countdown);
+            $("#sendcode").text("");
+        }
+        $('html').css({"height":"100%","overflow":"auto"});
+        $('body').css({"height":"100%","overflow":"auto"});
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+@CHARSET "UTF-8";
+
+body,.mui-content {
+    background-color: #fff;
+}
+.clear,
+.clrfix,
+.clearfix,
+.clearfloat {
+  *zoom: 1;
+}
+.clear:after,
+.clrfix:after,
+.clearfix:after,
+.clearfloat:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+/*******/
+.onSuccess{margin: 0 2.1rem;margin-top:0.62rem;position:relative;}
+.onSuccess .l-img{margin: 0 0.3rem;}
+.onSuccess .l-img img{display:block;width:100%}
+.onSuccess h3{background-image:url(../images/0921/res_icon_002.jpg);background-size:0.59rem 0.44rem;background-repeat:no-repeat;padding-left:0.71rem;font-weight:normal;font-size:0.40rem;margin-top:0.33rem;margin-bottom:0.1rem;line-height:0.44rem}
+.onSuccess p{font-size: 0.32rem;color:#666;}
+/*******/
+.l-btns{font-size:0.32rem;text-align:center;display:-webkit-box;padding:0.2rem 0.15rem 0.2rem 0.15rem;position:fixed;bottom:0;background-color:#fff;margin-bottom: 0.25rem;}
+.l-btns .l-btn{height:0.8rem;line-height:0.8rem;width:3.3rem;display:block;-webkit-box-flex:1;margin:0 0.15rem;border-radius:0.4rem}
+.l-btns .l-btn-1{border:1px solid #d3b66e;background-color:#fff}
+.l-btns .l-btn-2{background-color:#d3b66e;color:#fff}
+/*******/
+.l-content{margin:0 1.4rem;background-color:#f9f9f9;overflow:auto;height: 3.28rem;}
+.l-content .l-item{position:relative;background:url(../images/bg.png) no-repeat;background-size: 100% 100%;margin:0 0.23rem;border-radius:0.1rem;padding-left:1.56rem;padding-top: 3px;height:1.2rem}
+.l-content .l-item .l-img{position:absolute;width:0.72rem;height:0.72rem;padding:0.14rem 0.26rem;box-sizing:content-box;border-right:2px #f9f9f9 dotted;left:0}
+.l-content .l-item .l-img img{display:block;width:100%}
+.l-content .l-item h3{font-size:0.28rem;float:left;margin:0.22rem 0 0.05rem 0; font-weight: normal;}
+.l-content .l-item p{font-size:0.22rem;float:left;margin:0}
+.l-content .l-item p b{font-size:0.24rem;margin-left:0.05rem}
+/*******/
+.l-top-over{margin:0 1.4rem;margin-top:0.5rem;background-color:#f9f9f9;position:relative;height:1.18rem}
+.l-top-over h3{font-size:0.24rem;line-height:0.32rem;font-weight:normal;position:absolute;left:0.3rem;right:0.3rem;top:0.40rem;color:#c3a55b;text-align: center;}
+.l-top-over img{display:block;width:100%}
+/*******/
+.l-bottom-over{margin:0 1.19rem;left:-0.03rem;position:relative;top:-1.38rem}
+.l-bottom-over img{width:100%;display:block}

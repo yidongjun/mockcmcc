@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html ng-app="BindApp"  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>绑定畅由平台账户</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/public.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+</head>
+<body ng-controller="bindController">
+<input th:value="${id}"type="hidden" id="accountId" >
+<div class="container">
+    <div class="top">
+        <img class="logo" src="/static/images/logo.jpg" />
+        <h3>
+
+            <span><img alt="" src="/static/images/cylogo.png"></span>
+            <label>您正在绑定畅由平台账户</label>
+        </h3>
+    </div>
+    <div class="content">
+        <ul>
+            <li class="phone">
+                <i><img src="/static/images/tel.png" /></i>
+
+                <p  ><span ng-bind="inputModel.phone.value | formatMobile : inputModel.phone.value"></span>  <input type="text" id="telphoneNumber"/></p>
+            </li>
+            <li class="pwd-wrap">
+                <div class="pwd">
+                    <i><img src="/static/images/pwd.png" /></i>
+                    <p ng-click="showKeyboard(inputModel.pwd)"><span ng-bind="inputModel.pwd.secret"></span><input type="text" id="password"/></p>
+                </div>
+                <a href="javascript:void(0);" ng-click="showResetPwdTip()">忘记客服密码？</a>
+            </li>
+
+            <li class="clearfix">
+                <div class="sms-code">
+                    <i><img src="/static/images/sms.png" /></i>
+                    <p ng-click="showKeyboard(inputModel.sms)"><input type="text" id="smsCode"/></p>
+                </div>
+                <a class="auth-code" ng-click="getConfirmCode()" ng-bind="authBtnInfo">获取验证码</a>
+            </li>
+            <li class="protocol">
+                <b class="choose" ng-class="{true:'choose', false:''}[isCheck]" ng-click="checkPro()"></b><span>勾选代表您已阅读并同意</span><a href="/bind/goProtocol">《移动用户授权协议》</a>
+            </li>
+        </ul>
+        <div class="btn" ng-class="{true: 'btn gray', false: 'btn'}[isBinding]" >
+            <a href="javascript:void(0);" onclick="cmccSubmit();">确认提交</a>
+        </div>
+        <div class="blank"></div>
+    </div>
+    <!-- 居中弹出层 -->
+    <div class="overlay al_hide" ng-class="{true: 'overlay al_show', false: 'overlay al_hide'}[isDialogShow]">
+        <div class="overlayDiv">
+            <h2>信息</h2>
+            <i class="closeBtn" ng-click="closeDialog()"></i>
+            <div class="info" ng-bind="dialogMsg">
+            </div>
+            <a class="overlayBtn" ng-click="closeDialog()">确定</a>
+        </div>
+    </div>
+    <!-- 如何重置服务密码？ 弹出层 -->
+    <div class="overlay al_hide" ng-class="{true: 'overlay al_show', false: 'overlay al_hide'}[showResetPwd]">
+        <div class="resetPwd">
+            <h2>如何重置移动客服密码</h2>
+            <i class="closeBtn" ng-click="showResetPwdTip()"></i>
+            <div class="info">
+                <p>尊敬的中国移动客户：若您忘记{{pro=='100'?'':'客服'}}密码，可通过以下两种方式进行密码重置：</p>
+                <p>{{pro=='100'?'1、北京移动所有品牌个人客户，均可':'1、'}}通过拨打10086客服热线，按照语音提示进行重置。</p>
+                <p>{{pro=='100'?'2、北京移动全球通品牌个人客户，还可':'2、'}}通过发送短信代码，按照提示指令进行重置。</p>
+                <p>&nbsp;&nbsp;{{resetPwdTip}}</p>
+            </div>
+            <div class="overlayBtn">
+                <a ng-click="showResetPwdTip()">知道了</a>
+            </div>
+        </div>
+    </div>
+    <div id="keyb" class="keyboard">
+        <ul class="clearfix">
+            <li ng-click="inputNum('1')"><span><em></em><b></b></span></li>
+            <li ng-click="inputNum('2')"><span><em></em><b></b></span></li>
+            <li ng-click="inputNum('3')"><span><em></em><b></b></span></li>
+            <li ng-click="inputNum('4')"><span><em></em><b></b></span></li>
+            <li ng-click="inputNum('5')"><span><em></em><b></b></span></li>
+            <li ng-click="inputNum('6')"><span><em></em><b></b></span></li>
+            <li ng-click="inputNum('7')"><span><em></em><b></b></span></li>
+            <li ng-click="inputNum('8')"><span><em></em><b></b></span></li>
+            <li ng-click="inputNum('9')"><span><em></em><b></b></span></li>
+            <li ng-click="clear()">清空</li>
+            <li ng-click="inputNum('0')"><span><em></em><b></b></span></li>
+            <li ng-click="del()"><span><img class="del" src="/static/images/del.png" /></span></li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript" src="/static/js/jquery-1.8.0.min.js"></script>
+<script type="text/javaScript" src="/static/js/fastclick.min.js"></script>
+<script type="text/javascript" src="/static/js/angular-min.js"></script>
+
+
+</body>
+<script>
+
+    function cmccSubmit(){
+        var password =$("#password").val();
+        var telphoneNumber=$("#telphoneNumber").val();
+        var smsCode =$("#smsCode").val();
+        var accountId=$("#accountId").val();
+
+
+        $.ajax({
+            type : "POST",
+            url : "/binding",
+            data : {
+                "password":password,
+                "telphoneNumber":telphoneNumber,
+                "smsCode":smsCode,
+                "accountId":accountId
+            },
+            success : function(result) {
+                if(result.substr(0,4)=='0000'){
+                    // 0000|13790891234|index3.jsp
+                    var callUrl = result.substr(5,result.length);
+                    window.location.replace(callUrl);
+                }else{
+                    alert(result);
+                }
+            }
+        });
+    }
+</script>
+</html>
