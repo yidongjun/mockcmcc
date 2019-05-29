@@ -46,6 +46,11 @@ public class PointTrans implements Serializable {
      */
     private String orgTransId;
 
+    /**
+     * appid
+     */
+    private String appId;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -128,6 +133,14 @@ public class PointTrans implements Serializable {
         this.orgTransId = orgTransId;
     }
 
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -149,7 +162,8 @@ public class PointTrans implements Serializable {
             && (this.getThirdPoint() == null ? other.getThirdPoint() == null : this.getThirdPoint().equals(other.getThirdPoint()))
             && (this.getTransId() == null ? other.getTransId() == null : this.getTransId().equals(other.getTransId()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
-            && (this.getOrgTransId() == null ? other.getOrgTransId() == null : this.getOrgTransId().equals(other.getOrgTransId()));
+            && (this.getOrgTransId() == null ? other.getOrgTransId() == null : this.getOrgTransId().equals(other.getOrgTransId()))
+            && (this.getAppId() == null ? other.getAppId() == null : this.getAppId().equals(other.getAppId()));
     }
 
     @Override
@@ -166,6 +180,7 @@ public class PointTrans implements Serializable {
         result = prime * result + ((getTransId() == null) ? 0 : getTransId().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         result = prime * result + ((getOrgTransId() == null) ? 0 : getOrgTransId().hashCode());
+        result = prime * result + ((getAppId() == null) ? 0 : getAppId().hashCode());
         return result;
     }
 
@@ -185,6 +200,7 @@ public class PointTrans implements Serializable {
         sb.append(", transId=").append(transId);
         sb.append(", createTime=").append(createTime);
         sb.append(", orgTransId=").append(orgTransId);
+        sb.append(", appId=").append(appId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

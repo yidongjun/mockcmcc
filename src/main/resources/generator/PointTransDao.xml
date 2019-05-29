@@ -12,6 +12,7 @@
     <result column="trans_id" jdbcType="VARCHAR" property="transId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="org_trans_id" jdbcType="VARCHAR" property="orgTransId" />
+    <result column="app_id" jdbcType="VARCHAR" property="appId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -73,7 +74,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, point, `type`, `status`, user_id, mobile, third_point, trans_id, create_time, 
-    org_trans_id
+    org_trans_id, app_id
   </sql>
   <select id="selectByExample" parameterType="com.cmcc.mockcmcc.generator.PointTransExample" resultMap="BaseResultMap">
     select
@@ -103,6 +104,12 @@
     from point_trans
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectGroupByAppId" resultMap="BaseResultMap" >
+SELECT  app_id FROM point_trans
+WHERE app_id IS NOT NULL AND point_trans.`status`='00' AND `type`='01' AND TO_DAYS(create_time) = TO_DAYS(NOW())
+GROUP BY app_id
+
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from point_trans
     where id = #{id,jdbcType=INTEGER}
@@ -116,12 +123,12 @@
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.cmcc.mockcmcc.generator.PointTrans" useGeneratedKeys="true">
     insert into point_trans (point, `type`, `status`, 
       user_id, mobile, third_point, 
-      trans_id, create_time, org_trans_id
-      )
+      trans_id, create_time, org_trans_id, 
+      app_id)
     values (#{point,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
       #{userId,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{thirdPoint,jdbcType=VARCHAR}, 
-      #{transId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{orgTransId,jdbcType=VARCHAR}
-      )
+      #{transId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{orgTransId,jdbcType=VARCHAR}, 
+      #{appId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.cmcc.mockcmcc.generator.PointTrans" useGeneratedKeys="true">
     insert into point_trans
@@ -153,6 +160,9 @@
       <if test="orgTransId != null">
         org_trans_id,
       </if>
+      <if test="appId != null">
+        app_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="point != null">
@@ -182,6 +192,9 @@
       <if test="orgTransId != null">
         #{orgTransId,jdbcType=VARCHAR},
       </if>
+      <if test="appId != null">
+        #{appId,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.cmcc.mockcmcc.generator.PointTransExample" resultType="java.lang.Long">
@@ -190,6 +203,8 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+
+
   <update id="updateByExampleSelective" parameterType="map">
     update point_trans
     <set>
@@ -223,6 +238,9 @@
       <if test="record.orgTransId != null">
         org_trans_id = #{record.orgTransId,jdbcType=VARCHAR},
       </if>
+      <if test="record.appId != null">
+        app_id = #{record.appId,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -239,7 +257,8 @@
       third_point = #{record.thirdPoint,jdbcType=VARCHAR},
       trans_id = #{record.transId,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      org_trans_id = #{record.orgTransId,jdbcType=VARCHAR}
+      org_trans_id = #{record.orgTransId,jdbcType=VARCHAR},
+      app_id = #{record.appId,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -274,6 +293,9 @@
       <if test="orgTransId != null">
         org_trans_id = #{orgTransId,jdbcType=VARCHAR},
       </if>
+      <if test="appId != null">
+        app_id = #{appId,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -287,7 +309,8 @@
       third_point = #{thirdPoint,jdbcType=VARCHAR},
       trans_id = #{transId,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      org_trans_id = #{orgTransId,jdbcType=VARCHAR}
+      org_trans_id = #{orgTransId,jdbcType=VARCHAR},
+      app_id = #{appId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

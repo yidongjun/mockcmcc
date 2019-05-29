@@ -46,7 +46,7 @@ public class CMCCBindingResponse extends CMCCResponse {
         this.mobileUrl = mobileUrl;
     }
 
-    public static String defaultMoblieUrl = "http://10.1.102.97:9090/index";
+    public static String defaultMoblieUrl = "http://10.1.102.101:9093/index";
 
     public LinkedHashMap<String, String> responseString() throws InvocationTargetException, IllegalAccessException {
         LinkedHashMap<String, String> linkedHashMap = super.responseString();

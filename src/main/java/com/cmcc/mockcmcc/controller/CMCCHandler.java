@@ -4,6 +4,7 @@ import com.cmcc.mockcmcc.builder.CMCCBuilder;
 import com.cmcc.mockcmcc.generator.*;
 import com.cmcc.mockcmcc.response.CMCCResponse;
 import com.cmcc.mockcmcc.selector.ActionSelector;
+import com.cmcc.mockcmcc.sftp.SftpUtil;
 import com.cmcc.mockcmcc.util.MD5Util;
 import com.cmcc.mockcmcc.util.SpringContextUtil;
 import org.slf4j.Logger;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.InvocationTargetException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @RestController
@@ -26,6 +28,8 @@ public class CMCCHandler {
     private String defaultSmsCode = "1111";
     @Autowired
     UserBindingDao userBindingDao;
+
+    @Autowired PointTransDao pointTransDao;
 
     @Autowired
     UserDao userDao;
@@ -190,11 +194,8 @@ public class CMCCHandler {
         cmccBuilder.setType(type);
         cmccBuilder.setHmac(hmac);
         cmccBuilder.setRequestId(requestId);
-
-
         String invokeClass = ActionSelector.requestMap.get(interCode);
         String responseClass = ActionSelector.responseMap.get(interCode);
-
         try {
             CMCCBuilder cm = (CMCCBuilder) Class.forName(invokeClass).newInstance();
             String volidateMessage = cm.volidate(request);
@@ -226,9 +227,27 @@ public class CMCCHandler {
         }
         this.logger.info("返回消息:"+retrunStr);
         return retrunStr;
-
-
     }
+    @RequestMapping("/createReconFile")
+    public String createReconFile() throws Exception {
+
+        List<PointTrans> list=pointTransDao.selectGroupByAppId();
+        Date date =new Date();
+        String dir ="C:\\reconfile\\";
+        SimpleDateFormat simpleDateFormat= new SimpleDateFormat("yyyy_MM_dd");
+        String fileName =dir+"Deduct_AccessID_"+simpleDateFormat.format(date);
+        for(PointTrans pointTrans :list){
+            PointTransExample pointTransExample = new PointTransExample();
+            pointTransExample.createCriteria().andAppIdEqualTo(pointTrans.getAppId()).andTypeEqualTo("01").andStatusEqualTo("00");
+            List<PointTrans>  pointTransList = this.pointTransDao.selectByExample(pointTransExample);
+            SftpUtil.createFile(fileName+"."+pointTrans.getAppId(),pointTransList);
+        }
+        SftpUtil.mkDir(list);
+        List<PointTrans> list2=pointTransDao.selectGroupByAppId();
+        SftpUtil.createFile(list2);
+        return "ok";
+    }
+
 
 
 }

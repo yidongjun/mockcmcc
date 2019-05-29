@@ -32,4 +32,6 @@ public interface PointTransDao {
     int updateByPrimaryKeySelective(PointTrans record);
 
     int updateByPrimaryKey(PointTrans record);
+
+    List<PointTrans>  selectGroupByAppId();
 }

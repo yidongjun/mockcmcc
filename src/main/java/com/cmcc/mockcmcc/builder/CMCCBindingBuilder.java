@@ -1,6 +1,7 @@
 package com.cmcc.mockcmcc.builder;
 
 import com.cmcc.mockcmcc.util.MockCmccUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletRequest;
 

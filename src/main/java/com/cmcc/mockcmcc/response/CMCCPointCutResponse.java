@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class CMCCPointCutResponse extends CMCCResponse{
 
@@ -95,7 +96,7 @@ public class CMCCPointCutResponse extends CMCCResponse{
         pointTrans.setThirdPoint(this.thirdPoint);
         pointTrans.setCreateTime(new Date());
         pointTrans.setType("01");
-
+        pointTrans.setAppId(this.getPartnerId());
         UserDao userDao= SpringContextUtil.getBean(UserDao.class);
         UserExample userExample = new UserExample();
         userExample.createCriteria().andTelphoneEqualTo(this.mobile);
